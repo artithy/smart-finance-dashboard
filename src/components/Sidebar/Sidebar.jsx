@@ -10,9 +10,9 @@ import {
 
 export default function Sidebar() {
     return (
-        <aside className="w-64 min-h-screen bg-white border-r border-gray-200 p-6 hidden md:flex flex-col">
+        <aside className="w-full md:w-64 min-h-screen bg-white border-r border-gray-200 p-4 md:p-6 flex flex-col">
             <div className="mb-10">
-                <h1 className="text-2xl font-bold text-blue-500">
+                <h1 className="text-xl md:text-2xl font-bold text-blue-500">
                     Finance
                 </h1>
             </div>
@@ -21,7 +21,7 @@ export default function Sidebar() {
                 <ul className="space-y-3">
                     <li>
                         <Link href="/dashboard"
-                            className="flex items-center gap-3 rounded-lg hover:bg-gray-200">
+                            className="flex items-center gap-3 rounded-lg px-4 py-3 hover:bg-gray-200">
                             <LayoutDashboard size={20} />
                             <span>Dashboard</span>
                         </Link>
@@ -29,7 +29,7 @@ export default function Sidebar() {
 
                     <li>
                         <Link href="/transactions"
-                            className="flex items-center gap-3 rounded-lg hover:bg-gray-200">
+                            className="flex items-center gap-3 rounded-lg px-4 py-3 hover:bg-gray-200">
                             <ReceiptText size={20} />
                             <span>Transactions</span>
                         </Link>
@@ -37,7 +37,7 @@ export default function Sidebar() {
 
                     <li>
                         <Link href="/statistics"
-                            className="flex items-center gap-3 rounded-lg hover:bg-gray-200">
+                            className="flex items-center gap-3 rounded-lg px-4 py-3 hover:bg-gray-200">
                             <ChartColumn size={20} />
                             <span>Statistics</span>
                         </Link>
@@ -45,7 +45,7 @@ export default function Sidebar() {
 
                     <li>
                         <Link href="/budget"
-                            className="flex items-center gap-3 rounded-lg hover:bg-gray-200">
+                            className="flex items-center gap-3 rounded-lg px-4 py-3 hover:bg-gray-200">
                             <Wallet size={20} />
                             <span>Budget</span>
                         </Link>
@@ -53,8 +53,8 @@ export default function Sidebar() {
 
                     <li>
                         <Link href="/settings"
-                            className="flex items-center gap-3 rounded-lg hover:bg-gray-200">
-                            <Wallet size={20} />
+                            className="flex items-center gap-3 rounded-lg px-4 py-3 hover:bg-gray-200">
+                            <Settings size={20} />
                             <span>Settings</span>
                         </Link>
                     </li>
@@ -62,6 +62,6 @@ export default function Sidebar() {
                 </ul>
             </nav>
 
-        </aside>
+        </aside >
     )
 }
