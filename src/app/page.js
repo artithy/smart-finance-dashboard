@@ -1,9 +1,5 @@
-import Sidebar from "@/components/Sidebar/Sidebar";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <div>
-      <Sidebar />
-    </div>
-  );
+  redirect("/dashboard");
 }

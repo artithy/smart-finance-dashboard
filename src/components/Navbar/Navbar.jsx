@@ -1,12 +1,13 @@
-import { Bell, Moon, Search } from "lucide-icon";
+import Link from "next/link";
+import { Bell, Moon, Search } from "lucide-react";
 export default function Navbar() {
     return (
         <>
-            <header className="flex flex-col gap-4 border-b border-gray-200 bg-white p-4 md:flex-row md:items-center md:justify-between md:px-6 md:py-4">
+            <header className="flex flex-col gap-4 border-b border-gray-200 bg-white px-4 py-4 md:flex-row md:items-center md:justify-between md:px-6">
                 <div className="relative w-full md:max-w-md">
                     <Search
                         size={18}
-                        className="absolute left-3 top-1/2 -translaye-y-1/2 text-gray-400"
+                        className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                     />
 
                     <input
@@ -16,7 +17,7 @@ export default function Navbar() {
                     />
                 </div>
 
-                <div className="flex items-center justify-end gap-4">
+                <div className="flex items-center justify-end gap-4 shrink-0">
                     <button className="rounded-lg border border-gray-300 p-2 transition hover:bg-gray-100">
                         <Moon size={20} />
                     </button>
