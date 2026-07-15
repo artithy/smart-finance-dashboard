@@ -1,5 +1,6 @@
 import DashboardLayout from "@/layouts/DashboardLayout";
 import DashboardCard from "@/components/DashboardCard/DashboardCard";
+import RecentTransactions from "@/components/RecentTransactions/RecentTransactions";
 
 export default function DashboardPage() {
     return (
@@ -10,6 +11,7 @@ export default function DashboardPage() {
                 <DashboardCard title="Expense" amount="$3,500" />
                 <DashboardCard title="Savings" amount="$21,000" />
             </div>
+            <RecentTransactions />
         </DashboardLayout>
     );
 }
