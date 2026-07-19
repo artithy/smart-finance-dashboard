@@ -1,5 +1,5 @@
 
-export default function TransactionsTable({ transactions }) {
+export default function TransactionsTable({ transactions, onDelete, onEdit }) {
     return (
         <>
             <div className="rounded-xl bg-white p-6 shadow">
@@ -34,6 +34,9 @@ export default function TransactionsTable({ transactions }) {
                                         <th className="py-3 text-left">
                                             Date
                                         </th>
+                                        <th className="py-3 text-left">
+                                            Action
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,6 +49,18 @@ export default function TransactionsTable({ transactions }) {
                                             <td>{transaction.type}</td>
                                             <td>${transaction.amount}</td>
                                             <td>{transaction.date}</td>
+                                            <td>
+
+                                                <button onClick={() => onEdit(transaction.id)}
+                                                    className="mr-2 rounded px-3 py-1 text-white hover:bg-blue-600"
+                                                ></button>
+                                                <button onClick={() => onDelete(transaction.id)}
+                                                    className="rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600"
+                                                >
+                                                    Delete
+                                                </button>
+
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
