@@ -54,6 +54,7 @@ export default function TransactionsPage() {
                         isOpen={isModalOpen}
                         onClose={() => setIsModalOpen(false)}
                         setTransactions={setTransactions}
+                        editingTransaction={editingTransaction}
                     />
                 </div>
             </DashboardLayout>

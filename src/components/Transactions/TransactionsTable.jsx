@@ -15,7 +15,7 @@ export default function TransactionsTable({ transactions, onDelete, onEdit }) {
                     ) : (
 
                         <div className="overflow-x-auto">
-                            <table className="w-full">
+                            <table className="w-full table-fixed">
                                 <thead>
                                     <tr className="border-b">
                                         <th className="py-3 text-left">
@@ -34,7 +34,7 @@ export default function TransactionsTable({ transactions, onDelete, onEdit }) {
                                         <th className="py-3 text-left">
                                             Date
                                         </th>
-                                        <th className="py-3 text-left">
+                                        <th className="py-3 text-center">
                                             Action
                                         </th>
                                     </tr>
@@ -49,17 +49,22 @@ export default function TransactionsTable({ transactions, onDelete, onEdit }) {
                                             <td>{transaction.type}</td>
                                             <td>${transaction.amount}</td>
                                             <td>{transaction.date}</td>
-                                            <td>
+                                            <td className="py-3 text-center">
+                                                <div className="flex justify-center items-center gap-2">
+                                                    <button
+                                                        onClick={() => onEdit(transaction)}
+                                                        className="rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-600"
+                                                    >
+                                                        Edit
+                                                    </button>
 
-                                                <button onClick={() => onEdit(transaction.id)}
-                                                    className="mr-2 rounded px-3 py-1 text-white hover:bg-blue-600"
-                                                ></button>
-                                                <button onClick={() => onDelete(transaction.id)}
-                                                    className="rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600"
-                                                >
-                                                    Delete
-                                                </button>
-
+                                                    <button
+                                                        onClick={() => onDelete(transaction.id)}
+                                                        className="rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600"
+                                                    >
+                                                        Delete
+                                                    </button>
+                                                </div>
                                             </td>
                                         </tr>
                                     ))}

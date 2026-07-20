@@ -1,19 +1,28 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function AddTransactionModal({ isOpen, onClose, setTransactions, }) {
+export default function AddTransactionModal({ isOpen, onClose, setTransactions, editingTransaction, }) {
     const [title, setTitle] = useState("");
     const [amount, setAmount] = useState("");
     const [category, setCategory] = useState("");
     const [type, setType] = useState("Expense");
     const [date, setDate] = useState("");
+    useEffect(() => {
+        if (editingTransaction) {
+            setTitle(editingTransaction.title);
+            setAmount(editingTransaction.amount);
+            setCategory(editingTransaction.category);
+            setType(editingTransaction.type);
+            setDate(editingTransaction.date);
+        }
+    }, [editingTransaction]);
 
     if (!isOpen) { return null; }
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const newTransaction = {
-            id: Date.now(),
+            id: editingTransaction ? editingTransaction.id : Date.now(),
             title,
             amount,
             category,
@@ -21,7 +30,20 @@ export default function AddTransactionModal({ isOpen, onClose, setTransactions, 
             date,
         };
 
-        setTransactions((prevTransactions) => [...prevTransactions, newTransaction]);
+        if (editingTransaction) {
+            setTransactions((prevTransactions) =>
+                prevTransactions.map((transaction) =>
+                    transaction.id === editingTransaction.id
+                        ? newTransaction
+                        : transaction
+                )
+            );
+        } else {
+            setTransactions((prevTransactions) => [
+                ...prevTransactions,
+                newTransaction,
+            ]);
+        }
         setTitle("");
         setAmount("");
         setCategory("");
@@ -34,9 +56,9 @@ export default function AddTransactionModal({ isOpen, onClose, setTransactions, 
         <>
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
                 <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
-                    <div className="mb-6">
+                    <div className="mb-6 pt-5">
                         <h2 className="text-2xl font-bold text-gray-800">
-                            Add Transaction
+                            {editingTransaction ? "Edit Transaction" : "Add Transaction"}
                         </h2>
                         <p className="mt-1 text-sm text-gray-500">
                             Fill in the details below.
@@ -101,7 +123,7 @@ export default function AddTransactionModal({ isOpen, onClose, setTransactions, 
                                 type="submit"
                                 className="rounded-xl bg-blue-600 px-5 py-2 font-medium text-white hover:bg-blue-700"
                             >
-                                Save
+                                {editingTransaction ? "Update" : "Save"}
                             </button>
                         </div>
 
