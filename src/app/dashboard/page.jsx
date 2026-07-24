@@ -39,7 +39,7 @@ export default function DashboardPage() {
                 <DashboardCard title="Expense" amount={`$${totalExpense}`} />
                 <DashboardCard title="Savings" amount={`$${totalBalance}`} />
             </div>
-            <RecentTransactions />
+            <RecentTransactions transactions={transactions} />
         </DashboardLayout>
     );
 }
