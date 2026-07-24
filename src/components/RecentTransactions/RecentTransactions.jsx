@@ -8,7 +8,7 @@ export default function RecentTransactions({ transactions }) {
                     Recent Transaction
                 </h2>
 
-                {transactions.map((transaction) => (
+                {transactions.slice().reverse().slice(0, 5).map((transaction) => (
                     <div
                         key={transaction.id}
                         className="mb-4 flex items-center justify-between rounded-lg border border-gray-100 p-4"
