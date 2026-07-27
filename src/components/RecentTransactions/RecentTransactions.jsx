@@ -1,12 +1,17 @@
 import { ArrowDownLeft, Wallet } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function RecentTransactions({ transactions }) {
+    const router = useRouter();
     return (
         <>
             <div className="rounded-xl mt-8 border border-gray-200 bg-white p-6 shadow">
                 <h2 className="mb-5 text-xl font-semibold">
                     Recent Transaction
                 </h2>
+                <button onClick={() => router.push("/transactions")} className="text-sm font-medium text-blue-600 hover:underline">
+                    View All
+                </button>
 
                 {transactions.slice().reverse().slice(0, 5).map((transaction) => (
                     <div

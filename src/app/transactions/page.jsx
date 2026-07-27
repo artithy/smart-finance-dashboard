@@ -9,26 +9,29 @@ import AddTransactionModal from "@/components/Transactions/AddTransactionModal";
 export default function TransactionsPage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-
+    const [isLoaded, setIsLoaded] = useState(false);
     const [transactions, setTransactions] = useState([]);
     const [editingTransaction, setEditingTransaction] = useState(null);
-
-
     useEffect(() => {
         const savedTransactions = localStorage.getItem("transactions");
+
+        console.log("READ:", savedTransactions);
 
         if (savedTransactions) {
             setTransactions(JSON.parse(savedTransactions));
         }
+
+        setIsLoaded(true);
     }, []);
+
     useEffect(() => {
+        if (!isLoaded) return;
+
         localStorage.setItem(
             "transactions",
             JSON.stringify(transactions)
         );
-    }, [transactions]);
-
-
+    }, [transactions, isLoaded]);
     const handleAddTransaction = () => {
         setIsModalOpen(true);
     };
