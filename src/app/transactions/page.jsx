@@ -12,6 +12,7 @@ export default function TransactionsPage() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [transactions, setTransactions] = useState([]);
     const [editingTransaction, setEditingTransaction] = useState(null);
+    const [search, setSearch] = useState("");
     useEffect(() => {
         const savedTransactions = localStorage.getItem("transactions");
 
@@ -32,6 +33,13 @@ export default function TransactionsPage() {
             JSON.stringify(transactions)
         );
     }, [transactions, isLoaded]);
+
+    const filteredTransactions = transactions.filter((transaction) =>
+        transaction.title.toLowerCase().includes(search.toLowerCase())
+    );
+    console.log("Search:", search);
+    console.log("Transactions:", transactions);
+    console.log("Filtered:", filteredTransactions);
     const handleAddTransaction = () => {
         setIsModalOpen(true);
     };
@@ -51,8 +59,15 @@ export default function TransactionsPage() {
         <>
             <DashboardLayout>
                 <div className="space-y-6">
-                    <TransactionsHeader onAddTransaction={handleAddTransaction} />
-                    <TransactionsTable transactions={transactions} onDelete={handleDeleteTransaction} onEdit={handleEditTransaction} />
+                    <TransactionsHeader
+                        onAddTransaction={handleAddTransaction}
+                        search={search}
+                        setSearch={setSearch}
+                    />
+                    <TransactionsTable
+                        transactions={filteredTransactions}
+                        onDelete={handleDeleteTransaction}
+                        onEdit={handleEditTransaction} />
                     <AddTransactionModal
                         isOpen={isModalOpen}
                         onClose={() => setIsModalOpen(false)}
