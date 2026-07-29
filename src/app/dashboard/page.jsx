@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import DashboardCard from "@/components/DashboardCard/DashboardCard";
 import RecentTransactions from "@/components/RecentTransactions/RecentTransactions";
+import IncomeExpenseChart from "@/components/Dashboard/   IncomeExpenseChart";
 
 export default function DashboardPage() {
     const [transactions, setTransactions] = useState([]);
@@ -40,6 +41,10 @@ export default function DashboardPage() {
                 <DashboardCard title="Savings" amount={`$${totalBalance}`} />
             </div>
             <RecentTransactions transactions={transactions} />
+            <IncomeExpenseChart
+                totalIncome={totalIncome}
+                totalExpense={totalExpense}
+            />
         </DashboardLayout>
     );
 }
