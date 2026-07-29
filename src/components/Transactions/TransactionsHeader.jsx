@@ -1,7 +1,9 @@
-import SearchBar from "@/components/SearchBar/Searchbar";
+import Searchbar from "@/components/Searchbar/Searchbar";
+import Filterbar from "@/components/Filterbar/Filterbar";
 
 export default function TransactionsHeader({ onAddTransaction, search,
-    setSearch, }) {
+    setSearch, typeFilter,
+    setTypeFilter, }) {
     return (
         <>
             <div className="flex items-center justify-between">
@@ -14,7 +16,7 @@ export default function TransactionsHeader({ onAddTransaction, search,
                     </p>
                     <div className="mt-5 flex items-end gap-3">
                         <div className="w-72">
-                            <SearchBar
+                            <Searchbar
                                 search={search}
                                 setSearch={setSearch}
                             />
@@ -26,6 +28,16 @@ export default function TransactionsHeader({ onAddTransaction, search,
                         >
                             + Add Transaction
                         </button>
+                        <div className="">
+
+                        </div>
+
+                        <div className="mt-4">
+                            <Filterbar
+                                typeFilter={typeFilter}
+                                setTypeFilter={setTypeFilter}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

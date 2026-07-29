@@ -8,6 +8,7 @@ import AddTransactionModal from "@/components/Transactions/AddTransactionModal";
 
 export default function TransactionsPage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [typeFilter, setTypeFilter] = useState("all");
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [transactions, setTransactions] = useState([]);
@@ -34,8 +35,13 @@ export default function TransactionsPage() {
         );
     }, [transactions, isLoaded]);
 
-    const filteredTransactions = transactions.filter((transaction) =>
-        transaction.title.toLowerCase().includes(search.toLowerCase())
+    const filteredTransactions = transactions.filter((transaction) => {
+        const matchesSearch = transaction.title.toLowerCase().includes(search.toLowerCase());
+        const matchesType = typeFilter === "all" || transaction.type.toLowerCase() === typeFilter;
+        return matchesSearch && matchesType;
+
+
+    }
     );
     console.log("Search:", search);
     console.log("Transactions:", transactions);
@@ -63,6 +69,8 @@ export default function TransactionsPage() {
                         onAddTransaction={handleAddTransaction}
                         search={search}
                         setSearch={setSearch}
+                        typeFilter={typeFilter}
+                        setTypeFilter={setTypeFilter}
                     />
                     <TransactionsTable
                         transactions={filteredTransactions}
