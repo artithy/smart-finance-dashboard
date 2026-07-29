@@ -14,6 +14,7 @@ export default function TransactionsPage() {
     const [transactions, setTransactions] = useState([]);
     const [editingTransaction, setEditingTransaction] = useState(null);
     const [search, setSearch] = useState("");
+    const [sortOption, setSortOption] = useState("newest");
     useEffect(() => {
         const savedTransactions = localStorage.getItem("transactions");
 
@@ -39,10 +40,31 @@ export default function TransactionsPage() {
         const matchesSearch = transaction.title.toLowerCase().includes(search.toLowerCase());
         const matchesType = typeFilter === "all" || transaction.type.toLowerCase() === typeFilter;
         return matchesSearch && matchesType;
+    });
 
+    const sortTransactions = [...filteredTransactions].sort((a, b) => {
+        if (sortOption === "newest") {
+            return new Date(b.date) - new Date(a.date);
+        }
+        if (sortOption === "oldest") {
+            return new Date(a.date) - new Date(b.date);
+        }
+        if (sortOption === "highest") {
+            return new Number(b.amount) - new Number(a.amount);
+        }
+        if (sortOption === "lowest") {
+            return new Number(a.amount) - new Number(b.amount);
+        }
+        if (sortOption === "a-z") {
+            return a.title.localeCompare(b.title);
+        }
+        if (sortOption === "z-a") {
+            return b.title.localeCompare(a.title);
+        }
 
-    }
-    );
+        return 0;
+    })
+
     console.log("Search:", search);
     console.log("Transactions:", transactions);
     console.log("Filtered:", filteredTransactions);
@@ -71,9 +93,11 @@ export default function TransactionsPage() {
                         setSearch={setSearch}
                         typeFilter={typeFilter}
                         setTypeFilter={setTypeFilter}
+                        sortOption={sortOption}
+                        setSortOption={setSortOption}
                     />
                     <TransactionsTable
-                        transactions={filteredTransactions}
+                        transactions={sortTransactions}
                         onDelete={handleDeleteTransaction}
                         onEdit={handleEditTransaction} />
                     <AddTransactionModal
